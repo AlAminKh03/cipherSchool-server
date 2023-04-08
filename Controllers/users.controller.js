@@ -41,3 +41,80 @@ exports.postLogedInUser = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+exports.getUser = async (req, res) => {
+  const email = req.params.email;
+
+  try {
+    const user = await UserModel.findOne({ email: email });
+
+    res.status(201).send(user);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.updateBasicInfo = async (req, res) => {
+  const email = req.params.email;
+  const filter = { email: email };
+  const updatedBody = req.body;
+
+  try {
+    const updateInfo = await UserModel.updateMany(filter, updatedBody);
+
+    res.status(202).send(updateInfo);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.getbio = async (req, res) => {
+  const email = req.params.email;
+  const filter = { email: email };
+
+  try {
+    const Bio = await UserModel.find(filter, { bio: 1 });
+    res.status(201).send(Bio);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.updatebio = async (req, res) => {
+  const email = req.params.email;
+  const filter = { email: email };
+  const updatedBio = req.body;
+
+  try {
+    const Bio = await UserModel.updateOne(filter, updatedBio);
+    res.status(201).send(Bio);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.getSocial = async (req, res) => {
+  const email = req.params.email;
+  const filter = { email: email };
+  try {
+    const Social = await UserModel.findOne(filter);
+    res.status(201).send(Social);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.updateSocial = async (req, res) => {
+  const email = req.params.email;
+  const filter = { email: email };
+  const updatedSocial = req.body;
+  console.log(updatedSocial);
+
+  try {
+    const Social = await UserModel.updateOne(filter, updatedSocial);
+    console.log(Social);
+    res.status(201).send(Social);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};

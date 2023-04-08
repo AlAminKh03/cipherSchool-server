@@ -18,6 +18,15 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    img: String,
+    bio: String,
+
+    facebook: String,
+    instagram: String,
+    linkedIn: String,
+    github: String,
+    twitter: String,
+    website: String,
   },
   { timestamps: true }
 );
