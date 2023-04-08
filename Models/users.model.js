@@ -29,6 +29,12 @@ const UserSchema = new mongoose.Schema(
     website: String,
     education: String,
     profession: String,
+    react: Boolean,
+    typescript: Boolean,
+    python: Boolean,
+    anguler: Boolean,
+    vue: Boolean,
+    javascript: Boolean,
   },
   { timestamps: true }
 );

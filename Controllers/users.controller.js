@@ -137,9 +137,59 @@ exports.updateInfo = async (req, res) => {
   console.log(updatedInfo);
 
   try {
-    const Social = await UserModel.updateOne(filter, updatedInfo);
-    console.log(updatedInfo);
-    res.status(201).send(updatedInfo);
+    const Info = await UserModel.updateOne(filter, updatedInfo);
+    console.log(Info);
+    res.status(201).send(Info);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.getTech = async (req, res) => {
+  const email = req.params.email;
+  const filter = { email: email };
+  try {
+    const Tech = await UserModel.findOne(filter);
+    res.status(201).send(Tech);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.updateTech = async (req, res) => {
+  const email = req.params.email;
+  const filter = { email: email };
+  const updatedTech = req.body;
+  console.log(updatedTech);
+
+  try {
+    const Tech = await UserModel.updateOne(filter, updatedTech);
+    console.log(Tech);
+    res.status(201).send(Tech);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.updatePass = async (req, res) => {
+  try {
+    const email = req.params.email;
+    const { currentPass, newPass } = req.body;
+    const existingUser = await UserModel.findOne({ email: email });
+    const matchPassword = await bcrypt.compare(
+      currentPass,
+      existingUser.password
+    );
+    if (!matchPassword) {
+      return res
+        .status(400)
+        .send({ failed: "Please input your corrent password correctly" });
+    }
+    const updatePass = await UserModel.updateOne(
+      { email: email },
+      { password: newPass }
+    );
+    res.status(201).send({ success: " Password updated Sucessfully" });
   } catch (error) {
     res.status(500).send(error);
   }
