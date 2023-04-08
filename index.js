@@ -16,7 +16,7 @@ app.use(express.json());
 dbConnection();
 
 app.use("/user", userRoute);
-app.use(userRoute);
+app.use(followerController);
 
 // initial page
 app.get("/", (req, res) => {
