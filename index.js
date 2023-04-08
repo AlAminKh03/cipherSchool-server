@@ -8,6 +8,7 @@ const dbConnection = require("./db/dbConnection");
 
 // router
 const userRoute = require("./Routes/users.route");
+const followerController = require("./Routes/follower.route");
 
 const app = express();
 app.use(cors());
@@ -15,6 +16,7 @@ app.use(express.json());
 dbConnection();
 
 app.use("/user", userRoute);
+app.use(userRoute);
 
 // initial page
 app.get("/", (req, res) => {
