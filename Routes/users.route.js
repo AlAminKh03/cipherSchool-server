@@ -10,5 +10,7 @@ router.get("/getBio/:email", userController.getbio);
 router.patch("/getBio/:email", userController.updatebio);
 router.get("/getSocial/:email", userController.getSocial);
 router.patch("/getSocial/:email", userController.updateSocial);
+router.get("/getInfo/:email", userController.getInfo);
+router.patch("/getInfo/:email", userController.updateInfo);
 
 module.exports = router;

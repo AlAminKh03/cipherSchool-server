@@ -118,3 +118,29 @@ exports.updateSocial = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+exports.getInfo = async (req, res) => {
+  const email = req.params.email;
+  const filter = { email: email };
+  try {
+    const Info = await UserModel.findOne(filter);
+    res.status(201).send(Info);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.updateInfo = async (req, res) => {
+  const email = req.params.email;
+  const filter = { email: email };
+  const updatedInfo = req.body;
+  console.log(updatedInfo);
+
+  try {
+    const Social = await UserModel.updateOne(filter, updatedInfo);
+    console.log(updatedInfo);
+    res.status(201).send(updatedInfo);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};

@@ -27,6 +27,8 @@ const UserSchema = new mongoose.Schema(
     github: String,
     twitter: String,
     website: String,
+    education: String,
+    profession: String,
   },
   { timestamps: true }
 );
