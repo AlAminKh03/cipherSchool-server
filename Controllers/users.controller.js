@@ -183,12 +183,13 @@ exports.updatePass = async (req, res) => {
     if (!matchPassword) {
       return res
         .status(400)
-        .send({ failed: "Please input your corrent password correctly" });
+        .send({ failed: "Please input your correct password correctly" });
     }
-    const updatePass = await UserModel.updateOne(
-      { email: email },
-      { password: newPass }
-    );
+    const hashedPassword = await bcrypt.hash(newPass, 10);
+    console.log(hashedPassword);
+    const updatePass = await UserModel.updateOne(existingUser, {
+      password: hashedPassword,
+    });
     res.status(201).send({ success: " Password updated Sucessfully" });
   } catch (error) {
     res.status(500).send(error);
